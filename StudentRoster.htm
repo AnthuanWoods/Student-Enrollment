@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="/w3css/3/w3.css">
+
+
+
+<div ng-app = "StudentRoster" ng-controller = "myCtrl" class = "w3-card-2 w3-margin" stlye = "max-width: 400px;">
+ <header class="w3-container w3-light-grey w3-padding-16">
+   <h1>Currently Enrolled Students </h1>
+ </header>
+  <ul class = "w3-ul">
+    <li ng-repeat = "a in names" class = "w3-padding-16">
+      {{a}}
+      <span ng-click = "removeStudent($index)" style = "cursor:pointer;" class = "w3-right w3-margin-right">
+        x
+      </span>
+    </li>
+  </ul>
+  <div class = "w3-container w3-light-grey w3-padding-16">
+    <div class = "w3-row w3-margin-top">
+      <div class = "w3-col s10">
+        <input placeholder = "Enrol a new student" ng-model = "addMe" class = "w3-input w3-border w3-padding">
+      </div>
+      <div class = "w3-col s2">
+        <button ng-click = "addStudent()" class = "w3-btn s3-padding w3-green"> Enrol Student </button>
+      </div>
+    </div>
+    <p class = "w3-padding-left w3-text-red"> {{errortext}} </p>
+  </div>
+</div>
+</body>
+
+<script>
+var app = angular.module("StudentRoster", []);
+app.controller("myCtrl",function ($scope) {
+  $scope.names = ["Anthuan", "Edward", "Lucy"];
+  $scope.addStudent = function() {
+    $scope.errortext = "";
+    $scope.names.push($scope.addMe);
+    if($scope.products.indexOf($scope.addMe) == -1){
+      $scope.names.push($scope.addMe);
+    }
+    else {
+      $scope.errortext = "The student ia apready enrolled.";
+    }
+  }
+  $scope.removeStudent = function(a) {
+    $scope.errortext = "";
+    $scope.names.splice(a,1);
+  }
+});
+</script>
+
+</html>
